@@ -22,3 +22,7 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
 class CommentsView(ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+class CommentDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer

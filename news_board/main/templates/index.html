@@ -1,4 +1,4 @@
-{% include "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 {{ title }}	
@@ -11,7 +11,7 @@
 			<p><a href={{ post.link }} target="_blank">{{ post.title }}</a></p>
 			<a href="">votes: {{ post.amount_of_upvotes }}</a>
 			<a href="{% url 'comments' post_id=post.pk %}">
-				comment: {{ num_comments }}</a>
+				comments: {{ post.comments.count}}</a>
 			<p>by <b>{{ post.author_name }}</b> <i>{{ post.creation_date}}</i></p>
 		</div>		
 	{% endfor %}

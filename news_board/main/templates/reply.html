@@ -1,4 +1,4 @@
-{% include "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 {{ title }}	
@@ -15,7 +15,8 @@
 	{% csrf_token %}
 	{{ form.as_p }}
 	
-	<input type="hidden" name="post_id" id="post_id" value="{{ comment.pk }}">
+	<input type="hidden" name="parent_id" id="comment_id" value="{{ comment.pk }}">
+	<input type="hidden" name="post_id" id="post_id" value="{{ comment.post_id.pk }}">
 	<input type="submit" name="comment" id="comment" value="reply">
 	</form>
 </div>
