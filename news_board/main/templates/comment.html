@@ -2,8 +2,10 @@
 	<ul>
 	<div>
 		{{ comment.content }}<br>
-		by <b>{{ comment.author_name }}</b> at <i>{{ comment.creation_date }}</i><br>
-		<button><a href="{% url 'add_reply' comment_id=comment.pk %}">reply</a></button>
+		<div class="date">
+			by <b>{{ comment.author_name }}</b> at <i>{{ comment.creation_date }}</i><br>
+		</div>
+		<a href="{% url 'add_reply' comment_id=comment.pk %}">reply</a>
 	</div><br>
 	{% if comment.replies %}
 		{% for comment in comment.replies.all %}

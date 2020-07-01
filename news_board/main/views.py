@@ -6,11 +6,13 @@ from .forms import CommentAddForm
 
 
 def index(request):
+    ''' function render html template for index page''' 
     posts = Post.objects.all()
     context = {'posts': posts, 'title': 'Main Page'}
     return render(request, 'index.html', context)
 
 def comments(request, post_id):
+    ''' function render html template for comments page''' 
     post = Post.objects.get(pk=post_id)
     comments = Comment.objects.filter(post_id=post_id)
     if request.method == 'POST':
@@ -29,6 +31,7 @@ def comments(request, post_id):
     return render(request, 'comments.html', context)
 
 def add_reply(request, comment_id):
+    ''' function render html template for reply page''' 
     comment = Comment.objects.get(pk=comment_id)
     if request.method == 'POST':
         form = CommentAddForm(request.POST)
