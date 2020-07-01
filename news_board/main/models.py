@@ -11,7 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=120)
     link = models.URLField()
     creation_date = models.DateTimeField(auto_now_add=True,
-                                        db_index=True)
+                                         db_index=True)
     author_name = models.CharField(max_length=60)
     amount_of_upvotes = models.IntegerField(default=0)
 
@@ -26,6 +26,3 @@ class Reply(models.Model):
     content = models.TextField()
     creation_date = models.DateTimeField(default=timezone.now)
     comment_id = models.ForeignKey('Comment', on_delete=models.CASCADE)
-
-
-

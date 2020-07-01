@@ -8,4 +8,3 @@ class CommentAddForm(forms.ModelForm):
         # fields = ('author_name', 'content')
         fields = '__all__'
         widgets = {'post_id': forms.HiddenInput}
-

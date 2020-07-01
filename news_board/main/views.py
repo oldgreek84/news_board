@@ -20,11 +20,11 @@ def comments(request, post_id):
             comment = form.save(commit=False)
             comment.post_id = post
             comment.save()
-            return redirect('comments',  post_id=post_id)
+            return redirect('comments', post_id=post_id)
     else:
         form = CommentAddForm(instance=post)
     context = {'comments': comments, 'form': form,
-               'post':post }
+               'post': post}
     return render(request, 'comments.html', context)
 
 def add_reply(request, comment_id):
