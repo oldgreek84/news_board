@@ -36,7 +36,7 @@ class Comment(models.Model):
                                on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ('creation_date',)
+        ordering = ('-creation_date',)
 
     def __str__(self):
         return f'{self.author_name} to post {self.post_id}'

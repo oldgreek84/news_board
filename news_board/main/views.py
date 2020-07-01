@@ -35,10 +35,7 @@ def add_reply(request, comment_id):
         form = CommentAddForm(request.POST)
         if form.is_valid():
             parent_obj = None
-            try:
-                parent_id = int(request.POST.get('parent_id'))
-            except Exception:
-                parent_id = None
+            parent_id = int(request.POST.get('parent_id', None))
             if parent_id:
                 parent_obj = Comment.objects.get(pk=parent_id)
                 if parent_obj:
