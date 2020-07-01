@@ -1,4 +1,4 @@
-{% include "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 {{ title }}	
@@ -20,16 +20,13 @@
 	<input type="submit" name="comment" id="comment" value="add comment">
 	</form>
 	<div>
-		{% for comment in comments %}
-		<div>
-			<p>
-			{{ comment.content }}
-			</p>
-			<p>{{ comment.author_name }} {{ comment.creation_date }}</p>
-			<a href="{% url 'add_reply' comment_id=comment.pk %}">reply</a>
-		</div>
-
-		{% endfor %}	
+	<ul>
+	{% for comment in comments %}
+	{% if not comment.parent %}
+		<li>{% include 'comment.html' %}</li>
+	{% endif %}
+	{% endfor %}	
+	</ul>
 	</div>
 </div>
 	

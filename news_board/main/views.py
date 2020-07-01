@@ -7,8 +7,8 @@ from .forms import CommentAddForm
 
 def index(request):
     posts = Post.objects.all()
-    num_comments = Post.objects.annotate(Count('comment'))
-    context = {'posts': posts, 'num_comments': len(num_comments)}
+    num_comments = Post.objects.annotate(Count('comments'))
+    context = {'posts': posts, 'num_comments': num_comments}
     return render(request, 'index.html', context)
 
 def comments(request, post_id):
@@ -17,23 +17,42 @@ def comments(request, post_id):
     if request.method == 'POST':
         form = CommentAddForm(request.POST)
         if form.is_valid():
+
             comment = form.save(commit=False)
             comment.post_id = post
             comment.save()
             return redirect('comments', post_id=post_id)
     else:
+<<<<<<< HEAD
         form = CommentAddForm(instance=post)
     context = {'comments': comments, 'form': form,
                'post': post}
+=======
+        form = CommentAddForm()
+    context = {'comments': comments,
+               'form': form,
+               'post': post }
+>>>>>>> 6804854fa8db6738f4e8dea7419f6ac8b3d62c1c
     return render(request, 'comments.html', context)
 
-def add_reply(request, comment_id):
+def add_reply(request, comment_id ):
     comment = Comment.objects.get(pk=comment_id)
     if request.method == 'POST':
         form = CommentAddForm(request.POST)
         if form.is_valid():
-            form.save()
-            redirect('comments', post_id=comment_id)
+            parent_obj = None
+            try:
+                parent_id = int(request.POST.get('parent_id'))
+            except:
+                parent_id = None
+            if parent_id:
+                parent_obj = Comment.objects.get(pk=parent_id)
+                if parent_obj:
+                    reply = form.save(commit=False)
+                    reply.parent = parent_obj 
+                    reply.post_id = comment.post_id
+                    reply.save()
+            return redirect('comments', post_id=comment.post_id.pk)
     else:
         form = CommentAddForm(initial={'post_id': comment_id})
     context = {'comment': comment,
