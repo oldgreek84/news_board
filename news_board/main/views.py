@@ -52,3 +52,8 @@ def add_reply(request, comment_id):
     context = {'comment': comment,
                'form': form}
     return render(request, 'reply.html', context)
+
+def upvote_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    post.send_upvotes()
+    return redirect('index')

@@ -18,6 +18,10 @@ class Post(models.Model):
     def __str__(self):
         return f'Post {self.id} by {self.author_name}'
 
+    def send_upvotes(self):
+        self.amount_of_upvotes += 1
+        self.save()
+
 class Comment(models.Model):
     author_name = models.CharField(max_length=60)
     content = models.TextField()
