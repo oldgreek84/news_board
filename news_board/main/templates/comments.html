@@ -7,10 +7,9 @@
 {% block content %}
 <div>
 	<div>
-		{{ post.title }}
-		{{ post.amount_of_upvotes }}
-		{{ post.author_name }}
-		{{ post.creation_date }}
+		{{ post.title }}<br>
+		<div class="date">{{ post.author_name }}
+			{{ post.creation_date }}</div>
 	</div>
 
 	<form method='post'>
