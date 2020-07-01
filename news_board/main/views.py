@@ -3,12 +3,11 @@ from django.db.models import Count
 
 from .models import Post, Comment
 from .forms import CommentAddForm
-# Create your views here.
+
 
 def index(request):
     posts = Post.objects.all()
-    num_comments = Post.objects.annotate(Count('comments'))
-    context = {'posts': posts, 'num_comments': num_comments}
+    context = {'posts': posts, 'title': 'Main Page'}
     return render(request, 'index.html', context)
 
 def comments(request, post_id):
@@ -50,7 +49,9 @@ def add_reply(request, comment_id):
                'form': form}
     return render(request, 'reply.html', context)
 
+
 def upvote_post(request, post_id):
+    ''' upvote_post(post_id:int) -> None '''
     post = Post.objects.get(pk=post_id)
     post.send_upvotes()
     return redirect('index')
