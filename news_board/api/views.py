@@ -1,5 +1,9 @@
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.generics import (ListCreateAPIView,
-                                     RetrieveUpdateDestroyAPIView)
+                                     RetrieveUpdateDestroyAPIView,
+                                     UpdateAPIView)
 from rest_framework.generics import get_object_or_404
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
@@ -26,3 +30,14 @@ class CommentsView(ListCreateAPIView):
 class CommentDetail(RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+class VotesUpdate(APIView):
+    def patch(self, request, pk):
+        model = Post.objects.get(pk=pk)
+        data = {'amount_of_upvotes': model.amount_of_upvotes + 1}
+        serializer = PostSerializer(model, data=data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
