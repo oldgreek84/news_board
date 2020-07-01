@@ -3,8 +3,8 @@ from rest_framework.generics import (ListCreateAPIView,
 from rest_framework.generics import get_object_or_404
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
-from .serializers import CommentSerializer, PostSerializer
 from main.models import Post, Comment
+from .serializers import CommentSerializer, PostSerializer
 
 
 class PostsView(ListCreateAPIView):

@@ -23,19 +23,13 @@ def comments(request, post_id):
             comment.save()
             return redirect('comments', post_id=post_id)
     else:
-<<<<<<< HEAD
-        form = CommentAddForm(instance=post)
-    context = {'comments': comments, 'form': form,
-               'post': post}
-=======
         form = CommentAddForm()
     context = {'comments': comments,
                'form': form,
-               'post': post }
->>>>>>> 6804854fa8db6738f4e8dea7419f6ac8b3d62c1c
+               'post': post}
     return render(request, 'comments.html', context)
 
-def add_reply(request, comment_id ):
+def add_reply(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)
     if request.method == 'POST':
         form = CommentAddForm(request.POST)
@@ -43,13 +37,13 @@ def add_reply(request, comment_id ):
             parent_obj = None
             try:
                 parent_id = int(request.POST.get('parent_id'))
-            except:
+            except Exception:
                 parent_id = None
             if parent_id:
                 parent_obj = Comment.objects.get(pk=parent_id)
                 if parent_obj:
                     reply = form.save(commit=False)
-                    reply.parent = parent_obj 
+                    reply.parent = parent_obj
                     reply.post_id = comment.post_id
                     reply.save()
             return redirect('comments', post_id=comment.post_id.pk)
@@ -58,4 +52,3 @@ def add_reply(request, comment_id ):
     context = {'comment': comment,
                'form': form}
     return render(request, 'reply.html', context)
-
