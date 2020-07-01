@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'background_task',
 
     'api.apps.ApiConfig',
     'main.apps.MainConfig',
