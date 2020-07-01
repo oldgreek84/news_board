@@ -1,0 +1,14 @@
+<div>
+	<ul>
+	<p style="color:#005;">
+	{{ comment.content }}
+	</p>
+	<p>by <b>{{ comment.author_name }}</b> at <i>{{ comment.creation_date }}</i></p>
+	<a href="{% url 'add_reply' comment_id=comment.pk %}">reply</a>
+	{% if comment.replies %}
+		{% for comment in comment.replies.all %}
+		<li>		{% include 'comment.html' %}</li>		
+		{% endfor %}
+	{% endif %}
+	</ul>
+</div>
