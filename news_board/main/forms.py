@@ -4,8 +4,8 @@ from .models import Comment
 
 
 class CommentAddForm(forms.ModelForm):
-    ''' create a form to add comment'''
+    """ create a form to add comment"""
 
     class Meta:
         model = Comment
-        fields = ('content', 'author_name')
+        fields = ("content", "author_name")

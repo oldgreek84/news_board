@@ -6,38 +6,38 @@ from .forms import CommentAddForm
 
 
 def index(request):
-    ''' function render html template for index page''' 
+    """ function render html template for index page"""
     posts = Post.objects.all()
-    context = {'posts': posts, 'title': 'Main Page'}
-    return render(request, 'index.html', context)
+    context = {"posts": posts, "title": "Main Page"}
+    return render(request, "index.html", context)
+
 
 def comments(request, post_id):
-    ''' function render html template for comments page''' 
+    """ function render html template for comments page"""
     post = Post.objects.get(pk=post_id)
     comments = Comment.objects.filter(post_id=post_id)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = CommentAddForm(request.POST)
         if form.is_valid():
 
             comment = form.save(commit=False)
             comment.post_id = post
             comment.save()
-            return redirect('comments', post_id=post_id)
+            return redirect("comments", post_id=post_id)
     else:
         form = CommentAddForm()
-    context = {'comments': comments,
-               'form': form,
-               'post': post}
-    return render(request, 'comments.html', context)
+    context = {"comments": comments, "form": form, "post": post}
+    return render(request, "comments.html", context)
+
 
 def add_reply(request, comment_id):
-    ''' function render html template for reply page''' 
+    """ function render html template for reply page"""
     comment = Comment.objects.get(pk=comment_id)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = CommentAddForm(request.POST)
         if form.is_valid():
             parent_obj = None
-            parent_id = int(request.POST.get('parent_id', None))
+            parent_id = int(request.POST.get("parent_id", None))
             if parent_id:
                 parent_obj = Comment.objects.get(pk=parent_id)
                 if parent_obj:
@@ -45,16 +45,15 @@ def add_reply(request, comment_id):
                     reply.parent = parent_obj
                     reply.post_id = comment.post_id
                     reply.save()
-            return redirect('comments', post_id=comment.post_id.pk)
+            return redirect("comments", post_id=comment.post_id.pk)
     else:
-        form = CommentAddForm(initial={'post_id': comment_id})
-    context = {'comment': comment,
-               'form': form}
-    return render(request, 'reply.html', context)
+        form = CommentAddForm(initial={"post_id": comment_id})
+    context = {"comment": comment, "form": form}
+    return render(request, "reply.html", context)
 
 
 def upvote_post(request, post_id):
-    ''' upvote_post(post_id:int) -> None '''
+    """ upvote_post(post_id:int) -> None """
     post = Post.objects.get(pk=post_id)
     post.send_upvotes()
-    return redirect('index')
+    return redirect("index")

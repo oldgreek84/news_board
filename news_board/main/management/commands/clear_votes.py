@@ -4,7 +4,7 @@ from main.models import Post
 
 
 class Command(BaseCommand):
-    help = '''' docstring '''
+    help = """' docstring """
 
     def handle(self, *args, **options):
         posts = Post.objects.all()

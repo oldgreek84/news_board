@@ -7,19 +7,21 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0001_initial'),
+        ("main", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='post_id',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='main.Post'),
+            model_name="comment",
+            name="post_id",
+            field=models.ForeignKey(
+                default=1, on_delete=django.db.models.deletion.CASCADE, to="main.Post"
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='post',
-            name='amount_of_upvotes',
+            model_name="post",
+            name="amount_of_upvotes",
             field=models.IntegerField(default=0),
         ),
     ]
