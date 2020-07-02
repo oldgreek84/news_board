@@ -2,7 +2,7 @@
 Test web application with REST API.
 
 ## after clone:
-create migrsations
+create migrations:
 ```bash
 python3 manage.py makemigrations
 python3 manage.py migrate
