@@ -7,8 +7,13 @@ python3 manage.py clear_votes
 # work  with api:
 
 main url for api: "/api"
-url for posts: "/api/posts"url
-url for comments: "/api/comments"
+url for get, post a posts: "/api/posts/"
+url for put, patch, delete a posts: "/api/posts/{post_id}/"
+
+url for patch a upvotes in post: "/api/votes/{post_id}/"
+
+url for get, post a comments: "/api/comments/"
+url for put, patch, delete a comments: "/api/comments/{comment_id}/"
 
 # example to add post with curl:
 curl -X POST -H "Content-Type: application/json"
