@@ -5,8 +5,7 @@ body {
 }
 
 div {
-	color: grey;
-	
+	color: #262626;
 }
 
 div a {
@@ -14,18 +13,28 @@ div a {
 	color: black;
 }
 
+div a:hover {
+	color: red;
+}
+
 .nav {
 	background: darkorange;
 }
 
 .main_block {
+	margin: 5px 0;
+	padding-left: 10px;
 }
 
 .post {
 	margin-top: 20px;
+}
 
+.title {
+	color: #262626;
 }
 
 .date {
 	font-size: 10px;
+	color: grey;
 }
