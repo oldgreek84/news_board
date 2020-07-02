@@ -1,4 +1,15 @@
 # news_board
+## after clone:
+create migrsations
+```bash
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+create super_user:
+```bash
+python3 manage.py createsuperuser
+```
+
 
 ## command to clear upvotes of posts:
 
