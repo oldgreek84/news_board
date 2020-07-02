@@ -10,7 +10,7 @@
 	{% for post in posts %}
 	<li><div class="post"> 
  			<a href={{ post.link }} target="_blank">{{ post.title }}</a><br>
-			<div class="date">by <b>{{ post.author_name }}</b><i>{{ post.creation_date}}</i></div>
+			<div class="date">by <b>{{ post.author_name }}</b> at <i>{{ post.creation_date}}</i></div>
 			<a href="{% url 'upvote_post' post.pk %}">votes: {{ post.amount_of_upvotes }}</a>
 			<a href="{% url 'comments' post_id=post.pk %}">comments: {{ post.comments.count}}</a><br>
 		</div></li>		
