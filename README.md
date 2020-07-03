@@ -5,15 +5,15 @@ This application will has to run as a docker container.
 ## requirements for run application
 installed docker engine:
 
-(link to install)[https://docs.docker.com/engine/install/]
+[link to install](https://docs.docker.com/engine/install/)
 
 installed docker-compose:
 
-(link to install)[https://docs.docker.com/compose/install/]
+[link to install](https://docs.docker.com/compose/install/)
 
 installed git:
 
-(link to install)[https://git-scm.com/downloads]
+[link to install](https://git-scm.com/downloads)
 
 ## steps to install and run application:
 * clone repository:
