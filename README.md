@@ -47,9 +47,11 @@ docker-cpmpose run web python3 /code/manage.py clear_votes
 ```
 
 ## REST API docs:
-- endpoints to work with api:
+**endpoints to work with api:**
 
-*main url for api: *"/api"*
+- main url for api: 
+
+*"/api"*
 
 - url for get, post a posts:
 
