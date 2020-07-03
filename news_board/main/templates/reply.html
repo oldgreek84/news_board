@@ -6,9 +6,11 @@
 
 {% block content %}
 <div>
-	<div>
-		{{ comment.content }}
-		{{ comment.author_name }} {{ comment.creation_date }}
+	<div class="title">
+		<div class="date">
+			{{ comment.content }}
+			{{ comment.author_name }} {{ comment.creation_date }}
+		</div>
 	</div>
 
 	<form method='post'>

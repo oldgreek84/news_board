@@ -26,7 +26,8 @@ def comments(request, post_id):
             return redirect("comments", post_id=post_id)
     else:
         form = CommentAddForm()
-    context = {"comments": comments, "form": form, "post": post}
+    context = {"comments": comments, "form": form, "post": post,
+               "title": "Comments"}
     return render(request, "comments.html", context)
 
 
@@ -48,7 +49,7 @@ def add_reply(request, comment_id):
             return redirect("comments", post_id=comment.post_id.pk)
     else:
         form = CommentAddForm(initial={"post_id": comment_id})
-    context = {"comment": comment, "form": form}
+    context = {"comment": comment, "form": form, "title":"Add reply"}
     return render(request, "reply.html", context)
 
 
