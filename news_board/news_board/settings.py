@@ -26,10 +26,10 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
+# DEBUG = False
+DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "localhost"]
 
 
 # Application definition
@@ -41,7 +41,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # "django.contrib.sites",
+
     "rest_framework",
+    "rest_framework.authtoken",
+    # "allauth",
+    # "allauth.account",
+    # "allauth.socialaccount",
+
     "api.apps.ApiConfig",
     "main.apps.MainConfig",
 ]
@@ -58,6 +65,25 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "news_board.urls"
+LOGIN_REDIRECT_URL = "/"
+
+# AUTHENTICATION_BACKENDS = [
+#     # Needed to login by username in Django admin, regardless of `allauth`
+#     'django.contrib.auth.backends.ModelBackend',
+
+#     # `allauth` specific authentication methods, such as login by e-mail
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# needs for test email system
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
 
 TEMPLATES = [
     {
@@ -82,12 +108,16 @@ WSGI_APPLICATION = "news_board.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "HOST": "db",  # set in docker-compose.yml
-        "PORT": 5432,  # default postgres port
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "postgres",
+    #     "USER": "postgres",
+    #     "HOST": "db",  # set in docker-compose.yml
+    #     "PORT": 5432,  # default postgres port
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 # DATABASES = {
@@ -97,6 +127,9 @@ DATABASES = {
 #     }
 # }
 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -130,4 +163,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_FILE_DIRS = [
+#         os.path.join(BASE_DIR, "static"),
+#         os.path.join(BASE_DIR, 'staticfiles')
+#         ]
 # STATIC_ROOT = "staticfiles"

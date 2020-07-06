@@ -1,4 +1,5 @@
-from django.db import models
+from django.db import models, IntegrityError
+from django.contrib import messages
 from django.utils import timezone
 
 
@@ -17,9 +18,18 @@ class Post(models.Model):
     def __str__(self):
         return f"Post {self.id} by {self.author_name}"
 
-    def send_upvotes(self):
-        self.amount_of_upvotes += 1
-        self.save()
+    def votes_count(self):
+        return self.votes.all().count()
+
+    def upvote(self, user):
+        try:
+            self.votes.create(user=user, post=self)
+            self.amount_of_upvotes += 1
+            self.save()
+        except IntegrityError:
+            return 'already  upvotes'
+        return 'ok'
+
 
 
 class Comment(models.Model):
@@ -40,3 +50,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author_name} to post {self.post_id}"
+
+
+class Vote(models.Model):
+
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='votes', 
+            on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = [('post'), ('user')]

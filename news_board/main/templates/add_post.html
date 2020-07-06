@@ -5,14 +5,6 @@
 {% endblock title %}
 
 {% block content %}
-<div>
-	<div class="title">
-		<div class="date">
-			{{ comment.content }}
-			{{ comment.author_name }} {{ comment.creation_date }}
-		</div>
-	</div>
-
 	<form method='post'>
 	{% csrf_token %}
 	{{ form.as_p }}
@@ -20,7 +12,7 @@
 	<input type="hidden" name="parent_id" id="comment_id" value="{{ comment.pk }}">
 	<input type="hidden" name="post_id" id="post_id" value="{{ comment.post_id.pk }}">
 	<input type="hidden" name="author_name" id="author_name" value="{{ user.username }}">
-	<input type="submit" name="comment" id="comment" value="reply">
+	<input type="submit" name="comment" id="comment" value="add">
 	</form>
 </div>
 	
