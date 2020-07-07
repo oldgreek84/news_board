@@ -31,7 +31,6 @@ class Post(models.Model):
         return 'ok'
 
 
-
 class Comment(models.Model):
     """ create db model of comment """
 
