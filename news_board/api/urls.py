@@ -13,6 +13,6 @@ urlpatterns = [
     path("comments/", CommentList.as_view()),
     path("comments/<int:post_id>/", CommentView.as_view()),
     path("comments/<int:post_id>/<int:pk>/", CommentDetail.as_view()),
-    path("votes/<int:pk>/", VotesUpdate.as_view()),
-    path("api_auth/", obtain_auth_token, name="api_token_auth"),
+    path("upvote/<int:pk>/", VotesUpdate.as_view()),
+    path("api-token-auth/", obtain_auth_token, name="api_token_auth"),
 ]

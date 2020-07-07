@@ -5,7 +5,6 @@ from rest_framework.generics import (
     ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, 
 )
 from rest_framework.generics import get_object_or_404
-# from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import IsAuthenticated
 
 from main.models import Post, Comment
@@ -31,6 +30,7 @@ class PostView(ListCreateAPIView):
         """ method add author name to model"""
 
         serializer.save(author_name=self.request.user.username)
+        return Response(serializer.data)
 
 
 class PostDetail(RetrieveUpdateDestroyAPIView):
@@ -64,27 +64,22 @@ class CommentView(ListCreateAPIView):
         """ method return queryset of Comment """
 
         post_id = self.kwargs.get('post_id')
-        if post_id:
-            return Comment.objects.filter(post_id=post_id)
-        else:
-            return Comment.objects.all()
+        return Comment.objects.filter(post_id=post_id)
 
     def perform_create(self, serializer):
-        """ method add author name to model"""
+        """ method add author name to model and check correct
+            parent_id, post_id"""
         
         post_id = self.request.data.get('post_id')
         parent = self.request.data.get('parent')
-        print('post:', post_id, 'parent:', parent)
 
         if parent: 
-            obj = get_object_or_404(
-                Comment, post_id=post_id, pk=parent)
+            obj = get_object_or_404(Comment, post_id=post_id, pk=parent)
         data = {
-                'author_name': self.request.user.username,
-                'parent_id': parent,
-                'post_id_id': post_id
-                }
-        print(data)
+            'author_name': self.request.user.username,
+            'parent_id': parent,
+            'post_id_id': post_id
+            }
         if serializer.is_valid(raise_exception=True):
             serializer.save(**data)
         return Response(serializer.data)
@@ -112,12 +107,10 @@ class VotesUpdate(APIView):
     def patch(self, request, pk):
         """ method find model by pk, and change model upvotes"""
 
-        model = Post.objects.get(pk=pk)
-        user = request.user
-        model.upvote(user)
-        data = {}
-        serializer = PostSerializer(model, data=data, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data)
+        print(pk)
+        instance = get_object_or_404(Post, pk=pk)
+        instance.upvote(request.user)
+        serializer = PostSerializer(instance, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
