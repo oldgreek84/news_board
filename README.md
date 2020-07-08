@@ -6,6 +6,10 @@ This application will has to run as a docker container.
 
 [https://news-board-rest-api.herokuapp.com/](https://news-board-rest-api.herokuapp.com/)
 
+- link to REST API documentation:
+
+[postman documentation](https://documenter.getpostman.com/view/11911939/T17Kc667?version=latest)
+
 
 
 ## requirements for run application
@@ -56,6 +60,12 @@ docker-compose run web python3 /code/manage.py clear_votes
 ```
 
 ## REST API docs:
+
+**REST API documentation link:**
+
+[postman documentation](https://documenter.getpostman.com/view/11911939/T17Kc667?version=latest)
+
+
 **endpoints to work with api:**
 
 - main url for api: 
