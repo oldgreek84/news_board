@@ -41,13 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django.contrib.sites",
 
     "rest_framework",
     "rest_framework.authtoken",
-    # "allauth",
-    # "allauth.account",
-    # "allauth.socialaccount",
 
     "api.apps.ApiConfig",
     "main.apps.MainConfig",
@@ -67,13 +63,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = "news_board.urls"
 LOGIN_REDIRECT_URL = "/"
 
-# AUTHENTICATION_BACKENDS = [
-#     # Needed to login by username in Django admin, regardless of `allauth`
-#     'django.contrib.auth.backends.ModelBackend',
-
-#     # `allauth` specific authentication methods, such as login by e-mail
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # needs for test email system
@@ -108,17 +97,17 @@ WSGI_APPLICATION = "news_board.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": "postgres",
-    #     "USER": "postgres",
-    #     "HOST": "db",  # set in docker-compose.yml
-    #     "PORT": 5432,  # default postgres port
-    # },
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "HOST": "db",  # set in docker-compose.yml
+        "PORT": 5432,  # default postgres port
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 import dj_database_url
