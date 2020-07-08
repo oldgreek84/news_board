@@ -63,16 +63,27 @@ docker-compose run web python3 /code/manage.py clear_votes
 
 **REST API documentation link:**
 
-[postman documentation](https://documenter.getpostman.com/view/11911939/T17Kc667?version=latest)
+- [postman documentation](https://documenter.getpostman.com/view/11911939/T17Kc667?version=latest)
 
+**For work with API you will need registrate in app:**
 
-**endpoints to work with api:**
+- [link to register](https://news-board-rest-api.herokuapp.com/accounts/register)
+
+**Endpoints to work with api:**
 
 - main url for api: 
 
 *"/api"*
 
-- url for get, post a posts:
+- url for get you auth token:
+
+*"/api/api-token-auth/"*
+
+- url for get all posts without auth:
+
+*"/api/posts/all/"*
+
+- url for get, create a posts:
 
 *"/api/posts/"*
 
@@ -82,15 +93,19 @@ docker-compose run web python3 /code/manage.py clear_votes
 
 - url for patch a upvotes in post:
 
-*"/api/votes/{post_id}/"*
+*"/api/upvote/{post_id}/"*
 
-- url for get, post a comments:
+- url for get all comments without auth:
 
 *"/api/comments/"*
 
+- url for get, post a comments:
+
+*"/api/comments/{post_id}/"*
+
 - url for put, patch, delete a comments:
 
-*"/api/comments/{comment_id}/"*
+*"/api/comments/{post_id}/{comment_id}"*
 
 ## example to work api with curl:
 get all posts from site:
