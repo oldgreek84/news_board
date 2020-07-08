@@ -4,6 +4,8 @@ from main.models import Post, Comment
 
 
 class PostSerializer(serializers.ModelSerializer):
+    """ class serialize Post model to json """
+
     class Meta:
         model = Post
         fields = "__all__"
@@ -11,6 +13,8 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    """ class serialize Comment model to json """
+
     class Meta:
         model = Comment
         fields = "__all__"

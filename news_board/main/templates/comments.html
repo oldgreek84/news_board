@@ -19,7 +19,7 @@
 		<input type="hidden" name="author_name" id="author_name" value="{{ user.username }}">
 		<input type="submit" name="comment" id="comment" value="add comment">
 	</form>
-	<div>
+	<div class="comments">
 	<ul>
 	{% for comment in comments %}
 	{% if not comment.parent %}

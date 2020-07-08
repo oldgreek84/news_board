@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView, CreateView
 from django.contrib import messages
-# from django.db import IntegrityError
 from django.urls import reverse_lazy
 
 from .models import Post, Comment
@@ -36,8 +35,11 @@ def comments(request, post_id):
             comment.save()
             return redirect("comments", post_id=post_id)
     else:
-        form = CommentAddForm(initial={"author_name": request.GET.get("author_name")})
-    context = {"comments": comments, "form": form, "post": post,
+        form = CommentAddForm(
+                initial={"author_name": request.GET.get("author_name")})
+    context = {"comments": comments,
+               "form": form,
+               "post": post,
                "title": "Comments"}
     return render(request, "comments.html", context)
 
