@@ -2,6 +2,12 @@
 Test web application with REST API.
 This application will has to run as a docker container.
 
+- link to working app:
+
+[https://news-board-rest-api.herokuapp.com/](https://news-board-rest-api.herokuapp.com/)
+
+
+
 ## requirements for run application
 installed docker engine:
 [link to install docker](https://docs.docker.com/engine/install/)
@@ -46,7 +52,7 @@ docker-compose down
 
 ## command to clear upvotes of posts:
 ```bash
-docker-cpmpose run web python3 /code/manage.py clear_votes
+docker-compose run web python3 /code/manage.py clear_votes
 ```
 
 ## REST API docs:
