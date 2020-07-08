@@ -40,6 +40,9 @@ docker-compose up
 ```bash
 docker-compose down
 ```
+## link to deploied app
+
+[https://news-board-rest-api.herokuapp.com/](https://news-board-rest-api.herokuapp.com/)
 
 ## command to clear upvotes of posts:
 ```bash
