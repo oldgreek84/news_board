@@ -107,13 +107,3 @@ docker-compose run web python3 /code/manage.py clear_votes
 
 *"/api/comments/{post_id}/{comment_id}"*
 
-## example to work api with curl:
-get all posts from site:
-```bash
-curl -X GET -H "Content-Type: application/json" localhost:5000/api/posts/
-```
-post new post to site:
-```bash
-curl -X POST -H "Content-Type: application/json"
-     -d '{"title":{title of post}, "link":{link to post news}, "author_name":{author name}' {url}/api/posts/
-```
